@@ -97,8 +97,7 @@ def flash(color, timeOn, timeOff, repeat):
 	# if i < num_pixels:
 		# pixels[i] = off
 
-#direction, will need to finish this
-objDist2 = 100000 #100
+#objDist2 = 100000 #100
 pixels.fill(off)
 
 
@@ -109,7 +108,7 @@ def dispCompass(objHor, objDist, pickedUp):
 	
 	pixels.fill(off)
 	offset = 0
-	if abs(objHor) < 10.0:
+	if 0.0 < abs(objHor) < 10.0:
 		yInRange = True
 	else:
 		offset = round(sqrt(abs(objHor)))
@@ -120,7 +119,7 @@ def dispCompass(objHor, objDist, pickedUp):
 			offset = 10
 		if offset < -10: 
 			offset = -10
-	if 20.0 < objDist < 80.0:
+	if 80.0 < objDist < 96.0:
 		xInRange = True
 		
 	if xInRange == True and yInRange == True:
@@ -132,6 +131,7 @@ def dispCompass(objHor, objDist, pickedUp):
 		flash(green, 0.05, 0.05, 5)
 		
 	lowerlimitL = 10 + offset
+	detectingAlgae = True # FOR TESTING ONLY
 	if detectingAlgae == True: #This makes sure that the lights are only on if the robot is detecting algae
 		for i in range(lowerlimitL, lowerlimitL + 2): 
 			pixels[i] = red
@@ -143,26 +143,24 @@ def dispCompass(objHor, objDist, pickedUp):
 		pixels.fill(off)
 	pixels.show()
 	print(f"Offset = {offset}")
-	
-	
 
 	
 # objHor2 = 1000 #1 #For testing purposes
 # objDist2 = 10000 #20 #For testing purposes
-		
-dispCompass(1.0, 50.0, False)
+
+# sample compass sequence
+
+pixels.fill(off)
+dispCompass(1.0, 100.0, False)
 time.sleep(1)
-dispCompass(20.0, 50.0, False)
+dispCompass(20.0, 90.0, False)
 time.sleep(1)
 dispCompass(250.0, 50.0, False)
 time.sleep(1)
-dispCompass(-250.0, 50.0, False)
+dispCompass(-250.0, 200.0, False)
 time.sleep(1)
 pixels.fill(off)
 pixels.show()
-
-
-
 
 
 #network tables value loop
